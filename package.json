@@ -1,0 +1,18 @@
+{
+  "name": "zapdos",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "husky install",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "husky": "^7.0.4",
+    "standard-version": "^9.3.2"
+  }
+}

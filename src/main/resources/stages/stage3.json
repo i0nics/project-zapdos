@@ -1,0 +1,253 @@
+{
+  "Spikes" : [ {
+    "fileName" : "T_Spikes_Long.png",
+    "yCoord" : 312.3600000000009,
+    "xCoord" : 209.60984598522236
+  }, {
+    "fileName" : "T_Spikes_Long.png",
+    "yCoord" : 311.49000000000046,
+    "xCoord" : 1205.679124275202
+  }, {
+    "fileName" : "T_Spikes.png",
+    "yCoord" : 315.0300000000012,
+    "xCoord" : 2440.4976932056875
+  }, {
+    "fileName" : "T_Spikes.png",
+    "yCoord" : 312.030000000001,
+    "xCoord" : 2325.4976932056884
+  }, {
+    "fileName" : "T_Spikes.png",
+    "yCoord" : 313.1100000000016,
+    "xCoord" : 2690.6258898731894
+  }, {
+    "fileName" : "T_Spikes.png",
+    "yCoord" : 313.1100000000016,
+    "xCoord" : 2771.62588987319
+  }, {
+    "fileName" : "T_Spikes.png",
+    "yCoord" : 313.1100000000016,
+    "xCoord" : 2853.6258898731894
+  }, {
+    "fileName" : "T_Spikes_Long.png",
+    "yCoord" : 678.0800000000005,
+    "xCoord" : 3940.067465592212
+  } ],
+  "Platforms" : [ {
+    "fileName" : "T_Floor.png",
+    "yCoord" : 783.2299999999933,
+    "xCoord" : -15.350821280433593
+  }, {
+    "fileName" : "T_PlatformLong.png",
+    "yCoord" : 419.2299999999966,
+    "xCoord" : -442.3508212804322
+  }, {
+    "fileName" : "T_PlatformLong.png",
+    "yCoord" : 419.2299999999966,
+    "xCoord" : 557.6491787195644
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 698.2299999999913,
+    "xCoord" : 1238.6491787195669
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 343.2299999999983,
+    "xCoord" : 2203.6491787195646
+  }, {
+    "fileName" : "T_PlatformLong.png",
+    "yCoord" : 419.2299999999966,
+    "xCoord" : 1557.649178719565
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 264.2299999999983,
+    "xCoord" : 2556.6491787195628
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 11.229999999997744,
+    "xCoord" : 2556.6491787195628
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 523.2299999999987,
+    "xCoord" : 3581.64917871956
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 420.2299999999966,
+    "xCoord" : 2694.649178719561
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 420.2299999999966,
+    "xCoord" : 2894.6491787195614
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 420.2299999999966,
+    "xCoord" : 3093.6491787195587
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 420.2299999999966,
+    "xCoord" : 3176.6491787195573
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 528.229999999999,
+    "xCoord" : 3664.64917871956
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 277.2299999999975,
+    "xCoord" : 3664.64917871956
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 16.22999999999729,
+    "xCoord" : 3369.6491787195605
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 177.22999999999638,
+    "xCoord" : 2967.64917871956
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 101.22999999999627,
+    "xCoord" : 2312.649178719563
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -113.77000000000248,
+    "xCoord" : 1848.6491787195669
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : -398.7700000000012,
+    "xCoord" : 1923.6491787195669
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : -398.7700000000012,
+    "xCoord" : 1723.649178719566
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : 183.22999999999752,
+    "xCoord" : 1511.6491787195646
+  }, {
+    "fileName" : "T_PlatformLong.png",
+    "yCoord" : 123.2299999999957,
+    "xCoord" : 209.64917871956322
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 164.2299999999965,
+    "xCoord" : 69.64917871956686
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -88.77000000000254,
+    "xCoord" : 69.64917871956686
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -340.7700000000007,
+    "xCoord" : 69.64917871956686
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -124.77000000000226,
+    "xCoord" : 930.6491787195637
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -629.7700000000017,
+    "xCoord" : 721.6491787195632
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -591.7700000000019,
+    "xCoord" : 69.64917871956686
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -381.7700000000007,
+    "xCoord" : 807.6491787195621
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -843.7700000000021,
+    "xCoord" : 69.64917871956686
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -1382.77,
+    "xCoord" : 657.6491787195635
+  }, {
+    "fileName" : "T_Platform.png",
+    "yCoord" : -396.77000000000106,
+    "xCoord" : 1205.6491787195673
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -405.7700000000008,
+    "xCoord" : 2556.6491787195628
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -883.7700000000013,
+    "xCoord" : 657.6491787195635
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -1135.770000000001,
+    "xCoord" : 657.6491787195635
+  }, {
+    "fileName" : "T_PlatformLong.png",
+    "yCoord" : -405.7700000000008,
+    "xCoord" : 2694.649178719561
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -560.7700000000018,
+    "xCoord" : 3694.64917871956
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -1196.7700000000004,
+    "xCoord" : 2743.649178719561
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -1191.7700000000004,
+    "xCoord" : 2887.6491787195605
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -1190.7700000000004,
+    "xCoord" : 3016.649178719559
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -811.7700000000015,
+    "xCoord" : 3694.64917871956
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -1062.77,
+    "xCoord" : 3694.64917871956
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -463.7700000000017,
+    "xCoord" : 2832.6491787195614
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : -463.7700000000017,
+    "xCoord" : 2967.64917871956
+  }, {
+    "fileName" : "T_PlatformVertical.png",
+    "yCoord" : 529.229999999999,
+    "xCoord" : 3802.649178719559
+  } ],
+  "Enemies" : [ {
+    "fileName" : "T_ReverbotMoveLeft.gif",
+    "yCoord" : 627.2299999999942,
+    "xCoord" : 1960.6491787195666
+  } ],
+  "Background" : [ {
+    "fileName" : "T_background_spire.jpg"
+  } ],
+  "Music" : [ {
+    "fileName" : "bgtky.mp3"
+  } ],
+  "Doors" : [ {
+    "yCoord" : -719.0,
+    "isOpen" : false,
+    "xCoord" : 3355.9999999999905
+  } ],
+  "Buttons" : [ {
+    "fileName" : "button0",
+    "yCoord" : -519.77000000000197,
+    "xCoord" : 2771.649178719561
+  }, {
+    "fileName" : "button1",
+    "yCoord" : -578.770000000002,
+    "xCoord" : 2849.6491787195614
+  }, {
+    "fileName" : "button2",
+    "yCoord" : -578.770000000002,
+    "xCoord" : 3056.6491787195587
+  }, {
+    "fileName" : "button3",
+    "yCoord" : -519.77000000000197,
+    "xCoord" : 3127.6491787195587
+  } ]
+}

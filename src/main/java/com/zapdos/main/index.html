@@ -1,0 +1,936 @@
+<p><!-- #######  THIS IS A COMMENT - Visible only in the source editor #########--></p>
+<h2>PROJECT ZAPDOS Game Engine API Reference</h2>
+<p>Welcome to the PROJECT ZAPDOS Game Engine.&nbsp;</p>
+<h2 id="what'snew">What's New</h2>
+<p>PZ enables game developers and creators across industries to realize next-generation real-time 2D content and experiences with greater freedom, fidelity, and flexibility than ever before.</p>
+<p>We are empowering big and small teams to really push the boundaries of what's possible, visually and interactively, with the ability to:</p>
+<ul>
+<li class="Default">
+<p><strong>Leverage game-changing fidelity</strong>: Bring incredibly immersive and realistic interactive experiences to life with groundbreaking new features like AddObject and PaneGen that provide a generational leap in visual fidelity, and enable worlds to be fully dynamic.</p>
+</li>
+<li class="Default">
+<p><strong>Build bigger worlds:&nbsp;</strong>Think big, really big. PZ provides the tools and assets you need to create truly expansive worlds for your players to explore, using content that scales.</p>
+</li>
+<li class="Default">
+<p><strong>Animate and model in context:&nbsp;</strong>New artist-friendly animation authoring, retargeting, and runtime tools&mdash;together with a significantly expanded modeling toolset&mdash;reduce iteration and eliminate round-tripping, speeding up the creative process.</p>
+</li>
+<li class="Default">
+<p><strong>Get up to speed faster</strong>: With a modern, flexible UI that offers an enhanced user experience and increased efficiency; updated industry-specific templates that act as more useful starting points; and migration guides that provide a smooth transition from previous versions for existing users, PZ is easier to adopt and learn than ever before.</p>
+</li>
+</ul>
+<h3>The <strong>visual editor</strong> and <strong>source</strong> are linked together, allowing for seamless integration and extensibility by the user.&nbsp;<img src="https://html5-editor.net/images/smiley.png" alt="smiley" /></h3>
+<p>&nbsp;</p>
+<h2>Package acm.graphics Description</h2>
+<p>This package provides a set of classes that support the creation of simple, object-oriented graphical displays. The basic model is that of a felt board of the sort one might use as a child. The felt board itself is represented by the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GCanvas.html"><code>GCanvas</code></a>&nbsp;class, which is a lightweight container that supports the addition of graphical objects that correspond to the shapes attached to the board. These graphical objects come from a variety of classes that represent geometrical shapes and other graphical entities including lines, ovals, rectangles, images, and strings.</p>
+<p>The standard approach to using the&nbsp;<code>acm.graphics</code>&nbsp;package consists of the following steps:</p>
+<ol>
+<li>Allocate a new&nbsp;<code>GCanvas</code>&nbsp;object to serve as the surface to which subsequent graphical objects are attached.</li>
+<li>Make the canvas appear on the screen by adding it to some component that is displayed. The simplest strategy, for example, is to create a&nbsp;<code>JFrame</code>&nbsp;object and then add the&nbsp;<code>GCanvas</code>&nbsp;at the center of that frame.</li>
+<li>Use the&nbsp;<code>add</code>&nbsp;method in&nbsp;<code>GCanvas</code>&nbsp;to add new graphical objects from the&nbsp;<code>GObject</code>&nbsp;hierarchy.</li>
+</ol>
+<p>As an example, the following main program follows this outline to display a red square on the screen:</p>
+<p>&nbsp;</p>
+<pre><code>
+&nbsp;    public static void main(String[] args) {
+&nbsp;       GCanvas gc = new GCanvas();
+&nbsp;       JFrame frame = new JFrame();
+&nbsp;       frame.getContentPane().add(BorderLayout.CENTER, gc);
+&nbsp;       GRectangle square = new GRectangle(100, 100, 200, 200);
+&nbsp;       square.setFilled(true);
+&nbsp;       square.setColor(Color.RED);
+&nbsp;       gc.add(square);
+&nbsp;       frame.show();
+&nbsp;    }
+</code></pre>
+<p><code></code></p>
+<p>Much of this boilerplate can be eliminated by using the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html"><code>GraphicsProgram</code></a>&nbsp;class in the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/package-summary.html"><code>acm.program</code></a>&nbsp;package.</p>
+<p><code></code></p>
+<p>The public classes in the&nbsp;<code>acm.graphics</code>&nbsp;package can be diagrammed as follows:</p>
+<p><code></code></p>
+<p>&nbsp;</p>
+<p><code></code></p>
+<table border="1" width="600" cellspacing="0" cellpadding="4">
+<tbody>
+<tr>
+<td align="center"><img src="https://cs.stanford.edu/people/eroberts/jtf/images/GraphicsClasses.gif" /></td>
+</tr>
+</tbody>
+</table>
+<p><code></code></p>
+<p><code></code></p>
+<h2>acm.program<br />Class GraphicsProgram</h2>
+<pre><a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html">java.lang.Object</a>
+  <img src="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/resources/inherit.gif" alt="extended by " /><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">java.awt.Component</a>
+      <img src="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/resources/inherit.gif" alt="extended by " /><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html">java.awt.Container</a>
+          <img src="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/resources/inherit.gif" alt="extended by " /><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Panel.html">java.awt.Panel</a>
+              <img src="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/resources/inherit.gif" alt="extended by " /><a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html">java.applet.Applet</a>
+                  <img src="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/resources/inherit.gif" alt="extended by " /><a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html">javax.swing.JApplet</a>
+                      <img src="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/resources/inherit.gif" alt="extended by " /><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">acm.program.Program</a>
+                          <img src="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/resources/inherit.gif" alt="extended by " /><strong>acm.program.GraphicsProgram</strong>
+</pre>
+<dl>
+<dt><strong>All Implemented Interfaces:</strong></dt>
+<dd><a title="interface in acm.io" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/io/IOModel.html">IOModel</a>,&nbsp;<a title="class or interface in java.awt.event" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/ActionListener.html">ActionListener</a>,&nbsp;<a title="class or interface in java.awt.event" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyListener.html">KeyListener</a>,&nbsp;<a title="class or interface in java.awt.event" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/MouseListener.html">MouseListener</a>,&nbsp;<a title="class or interface in java.awt.event" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/MouseMotionListener.html">MouseMotionListener</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html">ImageObserver</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/MenuContainer.html">MenuContainer</a>,&nbsp;<a title="class or interface in java.io" href="http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html">Serializable</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html">Runnable</a>,&nbsp;<a title="class or interface in java.util" href="http://docs.oracle.com/javase/6/docs/api/java/util/EventListener.html">EventListener</a>,&nbsp;<a title="class or interface in javax.accessibility" href="http://docs.oracle.com/javase/6/docs/api/javax/accessibility/Accessible.html">Accessible</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/RootPaneContainer.html">RootPaneContainer</a></dd>
+</dl>
+<hr />
+<dl>
+<dt>
+<pre>public abstract class <strong>GraphicsProgram</strong></pre>
+</dt>
+<dt>extends <a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></dt>
+<dt>
+<pre>&nbsp;</pre>
+</dt>
+</dl>
+<p>This class is a standard subclass of&nbsp;<code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code>&nbsp;whose principal window is used for drawing graphics.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<dl>
+<dt><strong>See Also:</strong></dt>
+<dd><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/serialized-form.html#acm.program.GraphicsProgram">Serialized Form</a></dd>
+</dl>
+<hr />
+<p><a name="nested_class_summary"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableHeadingColor" bgcolor="#CCCCFF">
+<th colspan="2" align="left"><strong>Nested Class Summary</strong></th>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="nested_classes_inherited_from_class_javax.swing.JApplet"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Nested classes/interfaces inherited from class javax.swing.<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html">JApplet</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.AccessibleJApplet.html">JApplet.AccessibleJApplet</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="nested_classes_inherited_from_class_java.applet.Applet"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Nested classes/interfaces inherited from class java.applet.<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html">Applet</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.AccessibleApplet.html">Applet.AccessibleApplet</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="nested_classes_inherited_from_class_java.awt.Panel"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Nested classes/interfaces inherited from class java.awt.<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Panel.html">Panel</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Panel.AccessibleAWTPanel.html">Panel.AccessibleAWTPanel</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="nested_classes_inherited_from_class_java.awt.Container"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Nested classes/interfaces inherited from class java.awt.<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html">Container</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.AccessibleAWTContainer.html">Container.AccessibleAWTContainer</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="nested_classes_inherited_from_class_java.awt.Component"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Nested classes/interfaces inherited from class java.awt.<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">Component</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.AccessibleAWTComponent.html">Component.AccessibleAWTComponent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.BltBufferStrategy.html">Component.BltBufferStrategy</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.FlipBufferStrategy.html">Component.FlipBufferStrategy</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="field_summary"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableHeadingColor" bgcolor="#CCCCFF">
+<th colspan="2" align="left"><strong>Field Summary</strong></th>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="fields_inherited_from_class_acm.program.Program"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Fields inherited from class acm.program.<a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#CENTER">CENTER</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#EAST">EAST</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#NORTH">NORTH</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#SOUTH">SOUTH</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#WEST">WEST</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="fields_inherited_from_class_javax.swing.JApplet"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Fields inherited from class javax.swing.<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html">JApplet</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#accessibleContext">accessibleContext</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#rootPane">rootPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#rootPaneCheckingEnabled">rootPaneCheckingEnabled</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="fields_inherited_from_class_java.awt.Component"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Fields inherited from class java.awt.<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">Component</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#BOTTOM_ALIGNMENT">BOTTOM_ALIGNMENT</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#CENTER_ALIGNMENT">CENTER_ALIGNMENT</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#LEFT_ALIGNMENT">LEFT_ALIGNMENT</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#RIGHT_ALIGNMENT">RIGHT_ALIGNMENT</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#TOP_ALIGNMENT">TOP_ALIGNMENT</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="fields_inherited_from_class_java.awt.image.ImageObserver"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Fields inherited from interface java.awt.image.<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html">ImageObserver</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#ABORT">ABORT</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#ALLBITS">ALLBITS</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#ERROR">ERROR</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#FRAMEBITS">FRAMEBITS</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#HEIGHT">HEIGHT</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#PROPERTIES">PROPERTIES</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#SOMEBITS">SOMEBITS</a>,&nbsp;<a title="class or interface in java.awt.image" href="http://docs.oracle.com/javase/6/docs/api/java/awt/image/ImageObserver.html#WIDTH">WIDTH</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="constructor_summary"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableHeadingColor" bgcolor="#CCCCFF">
+<th colspan="2" align="left"><strong>Constructor Summary</strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>protected</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#GraphicsProgram()">GraphicsProgram</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new graphics program.</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="method_summary"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableHeadingColor" bgcolor="#CCCCFF">
+<th colspan="2" align="left"><strong>Method Summary</strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#add(java.awt.Component,%20double,%20double)">add</a></strong>(<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">Component</a>&nbsp;comp, double&nbsp;x, double&nbsp;y)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the component to the canvas and sets its location to the point (<code>x</code>,&nbsp;<code>y</code>).</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#add(java.awt.Component,%20acm.graphics.GPoint)">add</a></strong>(<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">Component</a>&nbsp;comp,&nbsp;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GPoint.html">GPoint</a>&nbsp;pt)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the component to the canvas and sets its location to the specified point.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#add(acm.graphics.GObject)">add</a></strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a new graphical object to this container.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#add(acm.graphics.GObject,%20double,%20double)">add</a></strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj, double&nbsp;x, double&nbsp;y)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the graphical object to the canvas and sets its location to the point (<code>x</code>,&nbsp;<code>y</code>).</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#add(acm.graphics.GObject,%20acm.graphics.GPoint)">add</a></strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj,&nbsp;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GPoint.html">GPoint</a>&nbsp;pt)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the graphical object to the canvas and sets its location to the specified point.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#addKeyListeners()">addKeyListeners</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the program as a&nbsp;<code>KeyListener</code>&nbsp;to the canvas.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#addKeyListeners(java.awt.event.KeyListener)">addKeyListeners</a></strong>(<a title="class or interface in java.awt.event" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyListener.html">KeyListener</a>&nbsp;listener)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the specified listener as a&nbsp;<code>KeyListener</code>&nbsp;to the canvas.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#addMouseListeners()">addMouseListeners</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the program as both a&nbsp;<code>MouseListener</code>&nbsp;and&nbsp;<code>MouseMotionListener</code>&nbsp;to the canvas.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#addMouseListeners(java.util.EventListener)">addMouseListeners</a></strong>(<a title="class or interface in java.util" href="http://docs.oracle.com/javase/6/docs/api/java/util/EventListener.html">EventListener</a>&nbsp;listener)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the specified listener as a&nbsp;<code>MouseListener</code>&nbsp;and/or&nbsp;<code>MouseMotionListener</code>, as appropriate, to the canvas.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>protected &nbsp;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GCanvas.html">GCanvas</a></code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#createGCanvas()">createGCanvas</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates the&nbsp;<code>GCanvas</code>&nbsp;used by the&nbsp;<code>GraphicsProgram</code>.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>protected &nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#endHook()">endHook</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ensures that the window is repainted at the end of the program.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a></code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#getElement(int)">getElement</a></strong>(int&nbsp;index)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the graphical object at the specified index, numbering from back to front in the the&nbsp;<em>z</em>&nbsp;dimension.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a></code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#getElementAt(double,%20double)">getElementAt</a></strong>(double&nbsp;x, double&nbsp;y)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the topmost graphical object that contains the point (<code>x</code>,&nbsp;<code>y</code>), or&nbsp;<code>null</code>&nbsp;if no such object exists.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a></code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#getElementAt(acm.graphics.GPoint)">getElementAt</a></strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GPoint.html">GPoint</a>&nbsp;pt)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the topmost graphical object that contains the specified point, or&nbsp;<code>null</code>&nbsp;if no such object exists.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;int</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#getElementCount()">getElementCount</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the number of graphical objects stored in this&nbsp;<code>GCanvas</code>.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GCanvas.html">GCanvas</a></code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#getGCanvas()">getGCanvas</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the&nbsp;<code>GCanvas</code>&nbsp;object used by this program.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#init()">init</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the code to be executed as startup time before the&nbsp;<code>run</code>&nbsp;method is called.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>protected &nbsp;boolean</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#isStarted()">isStarted</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks to see whether this program has started, usually by checking to see whether some pane exists.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;<a title="class or interface in java.util" href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html">Iterator</a>&lt;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&gt;</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#iterator()">iterator</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an&nbsp;<code>Iterator</code>&nbsp;that cycles through the elements within this container in the default direction, which is from back to front.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;<a title="class or interface in java.util" href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html">Iterator</a>&lt;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&gt;</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#iterator(int)">iterator</a></strong>(int&nbsp;direction)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an&nbsp;<code>Iterator</code>&nbsp;that cycles through the elements within this container in the specified direction, which must be one of the constants&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GContainer.html#FRONT_TO_BACK"><code>FRONT_TO_BACK</code></a>&nbsp;or&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GContainer.html#BACK_TO_FRONT"><code>BACK_TO_FRONT</code></a>&nbsp;from the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GContainer.html"><code>GContainer</code></a>&nbsp;interface.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#remove(acm.graphics.GObject)">remove</a></strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes a graphical object from this container.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#removeAll()">removeAll</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes all graphical objects from this container.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#removeAllComponents()">removeAllComponents</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes all components from this container.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#repaint()">repaint</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signals a need to repaint this window.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#run()">run</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the code to be executed as the program runs.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#setBackground(java.awt.Color)">setBackground</a></strong>(<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Color.html">Color</a>&nbsp;bg)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the background color of the&nbsp;<code>GCanvas</code>.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>static&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#startGraphicsProgram(acm.graphics.GObject,%20java.lang.String[])">startGraphicsProgram</a></strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html">String</a>[]&nbsp;args)</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a&nbsp;<code>GraphicsProgram</code>&nbsp;containing the specified&nbsp;<code>GObject</code>&nbsp;and then starts it.</td>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td align="right" valign="top" width="1%"><code>&nbsp;void</code></td>
+<td><code><strong><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#waitForClick()">waitForClick</a></strong>()</code><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waits for a mouse click in the window before proceeding.</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="methods_inherited_from_class_acm.program.Program"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Methods inherited from class acm.program.<a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#actionPerformed(java.awt.event.ActionEvent)">actionPerformed</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#add(java.awt.Component,%20java.lang.String,%20java.lang.Object)">add</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#addActionListeners()">addActionListeners</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#addActionListeners(java.awt.event.ActionListener)">addActionListeners</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#addExitHook(java.lang.Object)">addExitHook</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#addImpl(java.awt.Component,%20java.lang.Object,%20int)">addImpl</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#createConsole()">createConsole</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#createDialogIO()">createDialogIO</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#createMenuBar()">createMenuBar</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#createParameterTable(java.lang.String[])">createParameterTable</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#createProgramFrame()">createProgramFrame</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#destroy()">destroy</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#exit()">exit</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getAppletStub()">getAppletStub</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getArgumentArray()">getArgumentArray</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getBorder(java.lang.String)">getBorder</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getCentralRegionSize()">getCentralRegionSize</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getConsole()">getConsole</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getDialog()">getDialog</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getHeight()">getHeight</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getInputModel()">getInputModel</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getLayout()">getLayout</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getMainThread()">getMainThread</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getMenuBar()">getMenuBar</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getOutputModel()">getOutputModel</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getParameter(java.lang.String)">getParameter</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getParameterTable()">getParameterTable</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getPreferredSize()">getPreferredSize</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getReader()">getReader</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getRegionPanel(java.lang.String)">getRegionPanel</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getStartupObject()">getStartupObject</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getTitle()">getTitle</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getWidth()">getWidth</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#getWriter()">getWriter</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#isAppletMode()">isAppletMode</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#keyPressed(java.awt.event.KeyEvent)">keyPressed</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#keyReleased(java.awt.event.KeyEvent)">keyReleased</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#keyTyped(java.awt.event.KeyEvent)">keyTyped</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#main(java.lang.String[])">main</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#menuAction(java.awt.event.ActionEvent)">menuAction</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#mouseClicked(java.awt.event.MouseEvent)">mouseClicked</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#mouseDragged(java.awt.event.MouseEvent)">mouseDragged</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#mouseEntered(java.awt.event.MouseEvent)">mouseEntered</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#mouseExited(java.awt.event.MouseEvent)">mouseExited</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#mouseMoved(java.awt.event.MouseEvent)">mouseMoved</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#mousePressed(java.awt.event.MouseEvent)">mousePressed</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#mouseReleased(java.awt.event.MouseEvent)">mouseReleased</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#pause(double)">pause</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(boolean)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(char)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(double)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(float)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(int)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(long)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(java.lang.Object)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#print(java.lang.String)">print</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println()">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(boolean)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(char)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(double)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(float)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(int)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(long)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(java.lang.Object)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#println(java.lang.String)">println</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readBoolean()">readBoolean</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readBoolean(java.lang.String)">readBoolean</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readBoolean(java.lang.String,%20java.lang.String,%20java.lang.String)">readBoolean</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readDouble()">readDouble</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readDouble(double,%20double)">readDouble</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readDouble(java.lang.String)">readDouble</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readDouble(java.lang.String,%20double,%20double)">readDouble</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readInt()">readInt</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readInt(int,%20int)">readInt</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readInt(java.lang.String)">readInt</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readInt(java.lang.String,%20int,%20int)">readInt</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readLine()">readLine</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#readLine(java.lang.String)">readLine</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#remove(java.awt.Component)">remove</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#remove(int)">remove</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#runHook()">runHook</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setAppletStub(java.applet.AppletStub)">setAppletStub</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setConsole(acm.io.IOConsole)">setConsole</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setDialog(acm.io.IODialog)">setDialog</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setInputModel(acm.io.IOModel)">setInputModel</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setLayout(java.awt.LayoutManager)">setLayout</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setOutputModel(acm.io.IOModel)">setOutputModel</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setParameter(java.lang.String,%20java.lang.String)">setParameter</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setParameterTable(java.util.HashMap)">setParameterTable</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setStartupObject(java.lang.Object)">setStartupObject</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setTitle(java.lang.String)">setTitle</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#showErrorMessage(java.lang.String)">showErrorMessage</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#start()">start</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#start(java.lang.String[])">start</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#startHook()">startHook</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#startRun()">startRun</a>,&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#validate()">validate</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="methods_inherited_from_class_javax.swing.JApplet"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Methods inherited from class javax.swing.<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html">JApplet</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#createRootPane()">createRootPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#getAccessibleContext()">getAccessibleContext</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#getContentPane()">getContentPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#getGlassPane()">getGlassPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#getJMenuBar()">getJMenuBar</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#getLayeredPane()">getLayeredPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#getRootPane()">getRootPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#isRootPaneCheckingEnabled()">isRootPaneCheckingEnabled</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#paramString()">paramString</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#setContentPane(java.awt.Container)">setContentPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#setGlassPane(java.awt.Component)">setGlassPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#setJMenuBar(javax.swing.JMenuBar)">setJMenuBar</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#setLayeredPane(javax.swing.JLayeredPane)">setLayeredPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#setRootPane(javax.swing.JRootPane)">setRootPane</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#setRootPaneCheckingEnabled(boolean)">setRootPaneCheckingEnabled</a>,&nbsp;<a title="class or interface in javax.swing" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/JApplet.html#update(java.awt.Graphics)">update</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="methods_inherited_from_class_java.applet.Applet"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Methods inherited from class java.applet.<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html">Applet</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getAppletContext()">getAppletContext</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getAppletInfo()">getAppletInfo</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getAudioClip(java.net.URL)">getAudioClip</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getAudioClip(java.net.URL,%20java.lang.String)">getAudioClip</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getCodeBase()">getCodeBase</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getDocumentBase()">getDocumentBase</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getImage(java.net.URL)">getImage</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getImage(java.net.URL,%20java.lang.String)">getImage</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getLocale()">getLocale</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#getParameterInfo()">getParameterInfo</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#isActive()">isActive</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#newAudioClip(java.net.URL)">newAudioClip</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#play(java.net.URL)">play</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#play(java.net.URL,%20java.lang.String)">play</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#resize(java.awt.Dimension)">resize</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#resize(int,%20int)">resize</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#setStub(java.applet.AppletStub)">setStub</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#showStatus(java.lang.String)">showStatus</a>,&nbsp;<a title="class or interface in java.applet" href="http://docs.oracle.com/javase/6/docs/api/java/applet/Applet.html#stop()">stop</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="methods_inherited_from_class_java.awt.Panel"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Methods inherited from class java.awt.<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Panel.html">Panel</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Panel.html#addNotify()">addNotify</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="methods_inherited_from_class_java.awt.Container"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Methods inherited from class java.awt.<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html">Container</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#add(java.awt.Component)">add</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#add(java.awt.Component,%20int)">add</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#add(java.awt.Component,%20java.lang.Object)">add</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#add(java.awt.Component,%20java.lang.Object,%20int)">add</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#add(java.lang.String,%20java.awt.Component)">add</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#addContainerListener(java.awt.event.ContainerListener)">addContainerListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#addPropertyChangeListener(java.beans.PropertyChangeListener)">addPropertyChangeListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#addPropertyChangeListener(java.lang.String,%20java.beans.PropertyChangeListener)">addPropertyChangeListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#applyComponentOrientation(java.awt.ComponentOrientation)">applyComponentOrientation</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#areFocusTraversalKeysSet(int)">areFocusTraversalKeysSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#countComponents()">countComponents</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#deliverEvent(java.awt.Event)">deliverEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#doLayout()">doLayout</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#findComponentAt(int,%20int)">findComponentAt</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#findComponentAt(java.awt.Point)">findComponentAt</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getAlignmentX()">getAlignmentX</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getAlignmentY()">getAlignmentY</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getComponent(int)">getComponent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getComponentAt(int,%20int)">getComponentAt</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getComponentAt(java.awt.Point)">getComponentAt</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getComponentCount()">getComponentCount</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getComponents()">getComponents</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getComponentZOrder(java.awt.Component)">getComponentZOrder</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getContainerListeners()">getContainerListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getFocusTraversalKeys(int)">getFocusTraversalKeys</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getFocusTraversalPolicy()">getFocusTraversalPolicy</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getInsets()">getInsets</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getListeners(java.lang.Class)">getListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getMaximumSize()">getMaximumSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getMinimumSize()">getMinimumSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#getMousePosition(boolean)">getMousePosition</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#insets()">insets</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#invalidate()">invalidate</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#isAncestorOf(java.awt.Component)">isAncestorOf</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#isFocusCycleRoot()">isFocusCycleRoot</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#isFocusCycleRoot(java.awt.Container)">isFocusCycleRoot</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#isFocusTraversalPolicyProvider()">isFocusTraversalPolicyProvider</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#isFocusTraversalPolicySet()">isFocusTraversalPolicySet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#layout()">layout</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#list(java.io.PrintStream,%20int)">list</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#list(java.io.PrintWriter,%20int)">list</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#locate(int,%20int)">locate</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#minimumSize()">minimumSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#paint(java.awt.Graphics)">paint</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#paintComponents(java.awt.Graphics)">paintComponents</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#preferredSize()">preferredSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#print(java.awt.Graphics)">print</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#printComponents(java.awt.Graphics)">printComponents</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#processContainerEvent(java.awt.event.ContainerEvent)">processContainerEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#processEvent(java.awt.AWTEvent)">processEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#removeContainerListener(java.awt.event.ContainerListener)">removeContainerListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#removeNotify()">removeNotify</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#setComponentZOrder(java.awt.Component,%20int)">setComponentZOrder</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#setFocusCycleRoot(boolean)">setFocusCycleRoot</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#setFocusTraversalKeys(int,%20java.util.Set)">setFocusTraversalKeys</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#setFocusTraversalPolicy(java.awt.FocusTraversalPolicy)">setFocusTraversalPolicy</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#setFocusTraversalPolicyProvider(boolean)">setFocusTraversalPolicyProvider</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#setFont(java.awt.Font)">setFont</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#transferFocusBackward()">transferFocusBackward</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#transferFocusDownCycle()">transferFocusDownCycle</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Container.html#validateTree()">validateTree</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="methods_inherited_from_class_java.awt.Component"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Methods inherited from class java.awt.<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">Component</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#action(java.awt.Event,%20java.lang.Object)">action</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#add(java.awt.PopupMenu)">add</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addComponentListener(java.awt.event.ComponentListener)">addComponentListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addFocusListener(java.awt.event.FocusListener)">addFocusListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addHierarchyBoundsListener(java.awt.event.HierarchyBoundsListener)">addHierarchyBoundsListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addHierarchyListener(java.awt.event.HierarchyListener)">addHierarchyListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addInputMethodListener(java.awt.event.InputMethodListener)">addInputMethodListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addKeyListener(java.awt.event.KeyListener)">addKeyListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addMouseListener(java.awt.event.MouseListener)">addMouseListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addMouseMotionListener(java.awt.event.MouseMotionListener)">addMouseMotionListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#addMouseWheelListener(java.awt.event.MouseWheelListener)">addMouseWheelListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#bounds()">bounds</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#checkImage(java.awt.Image,%20java.awt.image.ImageObserver)">checkImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#checkImage(java.awt.Image,%20int,%20int,%20java.awt.image.ImageObserver)">checkImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#coalesceEvents(java.awt.AWTEvent,%20java.awt.AWTEvent)">coalesceEvents</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#contains(int,%20int)">contains</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#contains(java.awt.Point)">contains</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#createImage(java.awt.image.ImageProducer)">createImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#createImage(int,%20int)">createImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#createVolatileImage(int,%20int)">createVolatileImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#createVolatileImage(int,%20int,%20java.awt.ImageCapabilities)">createVolatileImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#disable()">disable</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#disableEvents(long)">disableEvents</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#dispatchEvent(java.awt.AWTEvent)">dispatchEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#enable()">enable</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#enable(boolean)">enable</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#enableEvents(long)">enableEvents</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#enableInputMethods(boolean)">enableInputMethods</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20boolean,%20boolean)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20byte,%20byte)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20char,%20char)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20double,%20double)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20float,%20float)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20int,%20int)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20long,%20long)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20java.lang.Object,%20java.lang.Object)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#firePropertyChange(java.lang.String,%20short,%20short)">firePropertyChange</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getBackground()">getBackground</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getBounds()">getBounds</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getBounds(java.awt.Rectangle)">getBounds</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getColorModel()">getColorModel</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getComponentListeners()">getComponentListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getComponentOrientation()">getComponentOrientation</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getCursor()">getCursor</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getDropTarget()">getDropTarget</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getFocusCycleRootAncestor()">getFocusCycleRootAncestor</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getFocusListeners()">getFocusListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getFocusTraversalKeysEnabled()">getFocusTraversalKeysEnabled</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getFont()">getFont</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getFontMetrics(java.awt.Font)">getFontMetrics</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getForeground()">getForeground</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getGraphics()">getGraphics</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getGraphicsConfiguration()">getGraphicsConfiguration</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getHierarchyBoundsListeners()">getHierarchyBoundsListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getHierarchyListeners()">getHierarchyListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getIgnoreRepaint()">getIgnoreRepaint</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getInputContext()">getInputContext</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getInputMethodListeners()">getInputMethodListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getInputMethodRequests()">getInputMethodRequests</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getKeyListeners()">getKeyListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getLocation()">getLocation</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getLocation(java.awt.Point)">getLocation</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getLocationOnScreen()">getLocationOnScreen</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getMouseListeners()">getMouseListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getMouseMotionListeners()">getMouseMotionListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getMousePosition()">getMousePosition</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getMouseWheelListeners()">getMouseWheelListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getName()">getName</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getParent()">getParent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getPeer()">getPeer</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getPropertyChangeListeners()">getPropertyChangeListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getPropertyChangeListeners(java.lang.String)">getPropertyChangeListeners</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getSize()">getSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getSize(java.awt.Dimension)">getSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getToolkit()">getToolkit</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getTreeLock()">getTreeLock</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getX()">getX</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#getY()">getY</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#gotFocus(java.awt.Event,%20java.lang.Object)">gotFocus</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#handleEvent(java.awt.Event)">handleEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#hasFocus()">hasFocus</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#hide()">hide</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#imageUpdate(java.awt.Image,%20int,%20int,%20int,%20int,%20int)">imageUpdate</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#inside(int,%20int)">inside</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isBackgroundSet()">isBackgroundSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isCursorSet()">isCursorSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isDisplayable()">isDisplayable</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isDoubleBuffered()">isDoubleBuffered</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isEnabled()">isEnabled</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isFocusable()">isFocusable</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isFocusOwner()">isFocusOwner</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isFocusTraversable()">isFocusTraversable</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isFontSet()">isFontSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isForegroundSet()">isForegroundSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isLightweight()">isLightweight</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isMaximumSizeSet()">isMaximumSizeSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isMinimumSizeSet()">isMinimumSizeSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isOpaque()">isOpaque</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isPreferredSizeSet()">isPreferredSizeSet</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isShowing()">isShowing</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isValid()">isValid</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#isVisible()">isVisible</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#keyDown(java.awt.Event,%20int)">keyDown</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#keyUp(java.awt.Event,%20int)">keyUp</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#list()">list</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#list(java.io.PrintStream)">list</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#list(java.io.PrintWriter)">list</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#location()">location</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#lostFocus(java.awt.Event,%20java.lang.Object)">lostFocus</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#mouseDown(java.awt.Event,%20int,%20int)">mouseDown</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#mouseDrag(java.awt.Event,%20int,%20int)">mouseDrag</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#mouseEnter(java.awt.Event,%20int,%20int)">mouseEnter</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#mouseExit(java.awt.Event,%20int,%20int)">mouseExit</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#mouseMove(java.awt.Event,%20int,%20int)">mouseMove</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#mouseUp(java.awt.Event,%20int,%20int)">mouseUp</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#move(int,%20int)">move</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#nextFocus()">nextFocus</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#paintAll(java.awt.Graphics)">paintAll</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#postEvent(java.awt.Event)">postEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#prepareImage(java.awt.Image,%20java.awt.image.ImageObserver)">prepareImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#prepareImage(java.awt.Image,%20int,%20int,%20java.awt.image.ImageObserver)">prepareImage</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#printAll(java.awt.Graphics)">printAll</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processComponentEvent(java.awt.event.ComponentEvent)">processComponentEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processFocusEvent(java.awt.event.FocusEvent)">processFocusEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processHierarchyBoundsEvent(java.awt.event.HierarchyEvent)">processHierarchyBoundsEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processHierarchyEvent(java.awt.event.HierarchyEvent)">processHierarchyEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processInputMethodEvent(java.awt.event.InputMethodEvent)">processInputMethodEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processKeyEvent(java.awt.event.KeyEvent)">processKeyEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processMouseEvent(java.awt.event.MouseEvent)">processMouseEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processMouseMotionEvent(java.awt.event.MouseEvent)">processMouseMotionEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#processMouseWheelEvent(java.awt.event.MouseWheelEvent)">processMouseWheelEvent</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#remove(java.awt.MenuComponent)">remove</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeComponentListener(java.awt.event.ComponentListener)">removeComponentListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeFocusListener(java.awt.event.FocusListener)">removeFocusListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeHierarchyBoundsListener(java.awt.event.HierarchyBoundsListener)">removeHierarchyBoundsListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeHierarchyListener(java.awt.event.HierarchyListener)">removeHierarchyListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeInputMethodListener(java.awt.event.InputMethodListener)">removeInputMethodListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeKeyListener(java.awt.event.KeyListener)">removeKeyListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeMouseListener(java.awt.event.MouseListener)">removeMouseListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeMouseMotionListener(java.awt.event.MouseMotionListener)">removeMouseMotionListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removeMouseWheelListener(java.awt.event.MouseWheelListener)">removeMouseWheelListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removePropertyChangeListener(java.beans.PropertyChangeListener)">removePropertyChangeListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#removePropertyChangeListener(java.lang.String,%20java.beans.PropertyChangeListener)">removePropertyChangeListener</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#repaint(int,%20int,%20int,%20int)">repaint</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#repaint(long)">repaint</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#repaint(long,%20int,%20int,%20int,%20int)">repaint</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#requestFocus()">requestFocus</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#requestFocus(boolean)">requestFocus</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#requestFocusInWindow()">requestFocusInWindow</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#requestFocusInWindow(boolean)">requestFocusInWindow</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#reshape(int,%20int,%20int,%20int)">reshape</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setBounds(int,%20int,%20int,%20int)">setBounds</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setBounds(java.awt.Rectangle)">setBounds</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setComponentOrientation(java.awt.ComponentOrientation)">setComponentOrientation</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setCursor(java.awt.Cursor)">setCursor</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setDropTarget(java.awt.dnd.DropTarget)">setDropTarget</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setEnabled(boolean)">setEnabled</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setFocusable(boolean)">setFocusable</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setFocusTraversalKeysEnabled(boolean)">setFocusTraversalKeysEnabled</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setForeground(java.awt.Color)">setForeground</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setIgnoreRepaint(boolean)">setIgnoreRepaint</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setLocale(java.util.Locale)">setLocale</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setLocation(int,%20int)">setLocation</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setLocation(java.awt.Point)">setLocation</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setMaximumSize(java.awt.Dimension)">setMaximumSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setMinimumSize(java.awt.Dimension)">setMinimumSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setName(java.lang.String)">setName</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setPreferredSize(java.awt.Dimension)">setPreferredSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setSize(java.awt.Dimension)">setSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setSize(int,%20int)">setSize</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#setVisible(boolean)">setVisible</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#show()">show</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#show(boolean)">show</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#size()">size</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#toString()">toString</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#transferFocus()">transferFocus</a>,&nbsp;<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html#transferFocusUpCycle()">transferFocusUpCycle</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;<a name="methods_inherited_from_class_java.lang.Object"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableSubHeadingColor" bgcolor="#EEEEFF">
+<th align="left"><strong>Methods inherited from class java.lang.<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html">Object</a></strong></th>
+</tr>
+<tr class="TableRowColor" bgcolor="white">
+<td><code><a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#clone()">clone</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#equals(java.lang.Object)">equals</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#finalize()">finalize</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#getClass()">getClass</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#hashCode()">hashCode</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#notify()">notify</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#notifyAll()">notifyAll</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#wait()">wait</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#wait(long)">wait</a>,&nbsp;<a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html#wait(long,%20int)">wait</a></code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><a name="constructor_detail"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableHeadingColor" bgcolor="#CCCCFF">
+<th colspan="1" align="left"><strong>Constructor Detail</strong></th>
+</tr>
+</tbody>
+</table>
+<p><a name="GraphicsProgram()"></a></p>
+<h3>GraphicsProgram</h3>
+<pre>protected <strong>GraphicsProgram</strong>()</pre>
+<dl>
+<dd>Creates a new graphics program.
+<p>&nbsp;</p>
+</dd>
+</dl>
+<p><a name="method_detail"></a></p>
+<table border="1" summary="" width="100%" cellspacing="0" cellpadding="3">
+<tbody>
+<tr class="TableHeadingColor" bgcolor="#CCCCFF">
+<th colspan="1" align="left"><strong>Method Detail</strong></th>
+</tr>
+</tbody>
+</table>
+<p><a name="add(java.awt.Component, double, double)"></a></p>
+<h3>add</h3>
+<pre>public final void <strong>add</strong>(<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">Component</a>&nbsp;comp,
+                      double&nbsp;x,
+                      double&nbsp;y)</pre>
+<dl>
+<dd>Adds the component to the canvas and sets its location to the point (<code>x</code>,&nbsp;<code>y</code>).
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>comp</code>&nbsp;- The component to add</dd>
+<dd><code>x</code>&nbsp;- The new x-coordinate for the object</dd>
+<dd><code>y</code>&nbsp;- The new y-coordinate for the object</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="add(java.awt.Component, acm.graphics.GPoint)"></a></p>
+<h3>add</h3>
+<pre>public final void <strong>add</strong>(<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Component.html">Component</a>&nbsp;comp,
+                      <a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GPoint.html">GPoint</a>&nbsp;pt)</pre>
+<dl>
+<dd>Adds the component to the canvas and sets its location to the specified point.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>comp</code>&nbsp;- The component to add</dd>
+<dd><code>pt</code>&nbsp;- A&nbsp;<code>GPoint</code>&nbsp;object giving the coordinates of the point</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="add(acm.graphics.GObject)"></a></p>
+<h3>add</h3>
+<pre>public void <strong>add</strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj)</pre>
+<dl>
+<dd>Adds a new graphical object to this container.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>gobj</code>&nbsp;- The graphical object to add</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="add(acm.graphics.GObject, double, double)"></a></p>
+<h3>add</h3>
+<pre>public final void <strong>add</strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj,
+                      double&nbsp;x,
+                      double&nbsp;y)</pre>
+<dl>
+<dd>Adds the graphical object to the canvas and sets its location to the point (<code>x</code>,&nbsp;<code>y</code>).
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>gobj</code>&nbsp;- The graphical object to add</dd>
+<dd><code>x</code>&nbsp;- The new x-coordinate for the object</dd>
+<dd><code>y</code>&nbsp;- The new y-coordinate for the object</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="add(acm.graphics.GObject, acm.graphics.GPoint)"></a></p>
+<h3>add</h3>
+<pre>public final void <strong>add</strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj,
+                      <a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GPoint.html">GPoint</a>&nbsp;pt)</pre>
+<dl>
+<dd>Adds the graphical object to the canvas and sets its location to the specified point.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>gobj</code>&nbsp;- The graphical object to add</dd>
+<dd><code>pt</code>&nbsp;- The new coordinates of the point</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="addKeyListeners()"></a></p>
+<h3>addKeyListeners</h3>
+<pre>public void <strong>addKeyListeners</strong>()</pre>
+<dl>
+<dd>Adds the program as a&nbsp;<code>KeyListener</code>&nbsp;to the canvas.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="addKeyListeners(java.awt.event.KeyListener)"></a></p>
+<h3>addKeyListeners</h3>
+<pre>public void <strong>addKeyListeners</strong>(<a title="class or interface in java.awt.event" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyListener.html">KeyListener</a>&nbsp;listener)</pre>
+<dl>
+<dd>Adds the specified listener as a&nbsp;<code>KeyListener</code>&nbsp;to the canvas.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>listener</code>&nbsp;- A&nbsp;<code>KeyListener</code>&nbsp;object</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="addMouseListeners()"></a></p>
+<h3>addMouseListeners</h3>
+<pre>public void <strong>addMouseListeners</strong>()</pre>
+<dl>
+<dd>Adds the program as both a&nbsp;<code>MouseListener</code>&nbsp;and&nbsp;<code>MouseMotionListener</code>&nbsp;to the canvas.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="addMouseListeners(java.util.EventListener)"></a></p>
+<h3>addMouseListeners</h3>
+<pre>public void <strong>addMouseListeners</strong>(<a title="class or interface in java.util" href="http://docs.oracle.com/javase/6/docs/api/java/util/EventListener.html">EventListener</a>&nbsp;listener)</pre>
+<dl>
+<dd>Adds the specified listener as a&nbsp;<code>MouseListener</code>&nbsp;and/or&nbsp;<code>MouseMotionListener</code>, as appropriate, to the canvas.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>listener</code>&nbsp;- A listener object that is either a&nbsp;<code>MouseListener</code>, a&nbsp;<code>MouseMotionListener</code>, or both</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="createGCanvas()"></a></p>
+<h3>createGCanvas</h3>
+<pre>protected <a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GCanvas.html">GCanvas</a> <strong>createGCanvas</strong>()</pre>
+<dl>
+<dd>Creates the&nbsp;<code>GCanvas</code>&nbsp;used by the&nbsp;<code>GraphicsProgram</code>. Subclasses can override this method to create their own&nbsp;<code>GCanvas</code>&nbsp;types.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Returns:</strong></dt>
+<dd>The&nbsp;<code>GCanvas</code>&nbsp;to be inserted into the program</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="endHook()"></a></p>
+<h3>endHook</h3>
+<pre>protected void <strong>endHook</strong>()</pre>
+<dl>
+<dd>Ensures that the window is repainted at the end of the program.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#endHook()">endHook</a></code>&nbsp;in class&nbsp;<code><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code></dd>
+</dl>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="getElement(int)"></a></p>
+<h3>getElement</h3>
+<pre>public <a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a> <strong>getElement</strong>(int&nbsp;index)</pre>
+<dl>
+<dd>Returns the graphical object at the specified index, numbering from back to front in the the&nbsp;<em>z</em>&nbsp;dimension.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>index</code>&nbsp;- The index of the component to return</dd>
+<dt><strong>Returns:</strong></dt>
+<dd>The graphical object at the specified index</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="getElementAt(double, double)"></a></p>
+<h3>getElementAt</h3>
+<pre>public <a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a> <strong>getElementAt</strong>(double&nbsp;x,
+                            double&nbsp;y)</pre>
+<dl>
+<dd>Returns the topmost graphical object that contains the point (<code>x</code>,&nbsp;<code>y</code>), or&nbsp;<code>null</code>&nbsp;if no such object exists.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>x</code>&nbsp;- The x-coordinate of the point being tested</dd>
+<dd><code>y</code>&nbsp;- The y-coordinate of the point being tested</dd>
+<dt><strong>Returns:</strong></dt>
+<dd>The graphical object at the specified location, or&nbsp;<code>null</code>&nbsp;if no such object exists.</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="getElementAt(acm.graphics.GPoint)"></a></p>
+<h3>getElementAt</h3>
+<pre>public final <a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a> <strong>getElementAt</strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GPoint.html">GPoint</a>&nbsp;pt)</pre>
+<dl>
+<dd>Returns the topmost graphical object that contains the specified point, or&nbsp;<code>null</code>&nbsp;if no such object exists.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>pt</code>&nbsp;- The coordinates being tested</dd>
+<dt><strong>Returns:</strong></dt>
+<dd>The graphical object at the specified location, or&nbsp;<code>null</code>&nbsp;if no such object exists</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="getElementCount()"></a></p>
+<h3>getElementCount</h3>
+<pre>public int <strong>getElementCount</strong>()</pre>
+<dl>
+<dd>Returns the number of graphical objects stored in this&nbsp;<code>GCanvas</code>.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Returns:</strong></dt>
+<dd>The number of graphical objects in this&nbsp;<code>GCanvas</code></dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="getGCanvas()"></a></p>
+<h3>getGCanvas</h3>
+<pre>public <a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GCanvas.html">GCanvas</a> <strong>getGCanvas</strong>()</pre>
+<dl>
+<dd>Returns the&nbsp;<code>GCanvas</code>&nbsp;object used by this program.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Returns:</strong></dt>
+<dd>The&nbsp;<code>GCanvas</code>&nbsp;object used by the program</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="init()"></a></p>
+<h3>init</h3>
+<pre>public void <strong>init</strong>()</pre>
+<dl>
+<dd>Specifies the code to be executed as startup time before the&nbsp;<code>run</code>&nbsp;method is called. Subclasses can override this method to perform any initialization code that would ordinarily be included in an applet&nbsp;<code>init</code>&nbsp;method. In general, subclasses will override&nbsp;<code>init</code>&nbsp;in GUI-based programs where the program simply sets up an initial state and then waits for events from the user. The&nbsp;<code>run</code>&nbsp;method is required for applications in which there needs to be some control thread while the program runs, as in a typical animation.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#init()">init</a></code>&nbsp;in class&nbsp;<code><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code></dd>
+</dl>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="isStarted()"></a></p>
+<h3>isStarted</h3>
+<pre>protected boolean <strong>isStarted</strong>()</pre>
+<dl>
+<dd>Checks to see whether this program has started, usually by checking to see whether some pane exists. Subclasses can override this method to ensure that their structures are visible before proceeding.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#isStarted()">isStarted</a></code>&nbsp;in class&nbsp;<code><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code></dd>
+</dl>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="iterator()"></a></p>
+<h3>iterator</h3>
+<pre>public <a title="class or interface in java.util" href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html">Iterator</a>&lt;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&gt; <strong>iterator</strong>()</pre>
+<dl>
+<dd>Returns an&nbsp;<code>Iterator</code>&nbsp;that cycles through the elements within this container in the default direction, which is from back to front. You can also run the iterator in the opposite direction by using the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#iterator(int)"><code>iterator</code></a><code>(</code><em>direction</em><code>)</code>&nbsp;form of this method.
+<p>Applets that want to run in browsers, however, should avoid using this method, because&nbsp;<code>Iterator</code>&nbsp;is not supported on 1.1 browsers. For maximum portability, you should rely instead on the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GContainer.html#getElementCount()"><code>getElementCount</code></a>&nbsp;and&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GContainer.html#getElement(int)"><code>getElement</code></a>&nbsp;methods, which provide the same functionality in a browser-compatible way.</p>
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Returns:</strong></dt>
+<dd>An&nbsp;<code>Iterator</code>&nbsp;ranging over the elements of the container from back to front</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="iterator(int)"></a></p>
+<h3>iterator</h3>
+<pre>public <a title="class or interface in java.util" href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html">Iterator</a>&lt;<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&gt; <strong>iterator</strong>(int&nbsp;direction)</pre>
+<dl>
+<dd>Returns an&nbsp;<code>Iterator</code>&nbsp;that cycles through the elements within this container in the specified direction, which must be one of the constants&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GContainer.html#FRONT_TO_BACK"><code>FRONT_TO_BACK</code></a>&nbsp;or&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GContainer.html#BACK_TO_FRONT"><code>BACK_TO_FRONT</code></a>&nbsp;from the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GContainer.html"><code>GContainer</code></a>&nbsp;interface.
+<p><code>for (Iterator&lt;GObject&gt; i = iterator(direction); i.hasNext(); )</code></p>
+<p>Applets that want to run in browsers, however, should avoid using this method, because&nbsp;<code>Iterator</code>&nbsp;is not supported on 1.1 browsers. For maximum portability, you should rely instead on the&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GContainer.html#getElementCount()"><code>getElementCount</code></a>&nbsp;and&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GContainer.html#getElement(int)"><code>getElement</code></a>&nbsp;methods, which provide the same functionality in a browser-compatible way.</p>
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Returns:</strong></dt>
+<dd>An&nbsp;<code>Iterator</code>&nbsp;ranging over the elements of the container in the specified direction</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="remove(acm.graphics.GObject)"></a></p>
+<h3>remove</h3>
+<pre>public void <strong>remove</strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj)</pre>
+<dl>
+<dd>Removes a graphical object from this container.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>gobj</code>&nbsp;- The graphical object to remove</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="removeAll()"></a></p>
+<h3>removeAll</h3>
+<pre>public void <strong>removeAll</strong>()</pre>
+<dl>
+<dd>Removes all graphical objects from this container. Note that this definition overrides the&nbsp;<code>Container</code>&nbsp;version of&nbsp;<code>removeAll</code>, which is replaced by&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#removeAllComponents()"><code>removeAllComponents</code></a>.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#removeAll()">removeAll</a></code>&nbsp;in class&nbsp;<code><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code></dd>
+</dl>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="removeAllComponents()"></a></p>
+<h3>removeAllComponents</h3>
+<pre>public void <strong>removeAllComponents</strong>()</pre>
+<dl>
+<dd>Removes all components from this container.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="repaint()"></a></p>
+<h3>repaint</h3>
+<pre>public void <strong>repaint</strong>()</pre>
+<dl>
+<dd>Signals a need to repaint this window.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#repaint()">repaint</a></code>&nbsp;in class&nbsp;<code><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code></dd>
+</dl>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="run()"></a></p>
+<h3>run</h3>
+<pre>public void <strong>run</strong>()</pre>
+<dl>
+<dd>Specifies the code to be executed as the program runs. The&nbsp;<code>run</code>&nbsp;method is required for applications that have a thread of control that runs even in the absence of user actions, such as a program that uses console interation or that involves animation. GUI-based programs that operate by setting up an initial configuration and then wait for user events usually do not specify a&nbsp;<code>run</code>&nbsp;method and supply a new definition for&nbsp;<code>init</code>&nbsp;instead.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html#run()">run</a></code>&nbsp;in interface&nbsp;<code><a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Runnable.html">Runnable</a></code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#run()">run</a></code>&nbsp;in class&nbsp;<code><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code></dd>
+</dl>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="setBackground(java.awt.Color)"></a></p>
+<h3>setBackground</h3>
+<pre>public void <strong>setBackground</strong>(<a title="class or interface in java.awt" href="http://docs.oracle.com/javase/6/docs/api/java/awt/Color.html">Color</a>&nbsp;bg)</pre>
+<dl>
+<dd>Sets the background color of the&nbsp;<code>GCanvas</code>.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html#setBackground(java.awt.Color)">setBackground</a></code>&nbsp;in class&nbsp;<code><a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html">Program</a></code></dd>
+</dl>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>bg</code>&nbsp;- The new background color</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="startGraphicsProgram(acm.graphics.GObject, java.lang.String[])"></a></p>
+<h3>startGraphicsProgram</h3>
+<pre>public static void <strong>startGraphicsProgram</strong>(<a title="class in acm.graphics" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/graphics/GObject.html">GObject</a>&nbsp;gobj,
+                                        <a title="class or interface in java.lang" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html">String</a>[]&nbsp;args)</pre>
+<dl>
+<dd>Creates a&nbsp;<code>GraphicsProgram</code>&nbsp;containing the specified&nbsp;<code>GObject</code>&nbsp;and then starts it. This code is called only by the&nbsp;<code>start</code>&nbsp;method in&nbsp;<code>GObject</code>.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl>
+<dt><strong>Parameters:</strong></dt>
+<dd><code>gobj</code>&nbsp;- The object to be inserted into the&nbsp;<code>GraphicsProgram</code></dd>
+<dd><code>args</code>&nbsp;- The array of arguments</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p><a name="waitForClick()"></a></p>
+<h3>waitForClick</h3>
+<pre>public void <strong>waitForClick</strong>()</pre>
+<dl>
+<dd>Waits for a mouse click in the window before proceeding.
+<p>&nbsp;</p>
+</dd>
+<dd>
+<dl></dl>
+</dd>
+</dl>
+<hr />
+<p><a name="navbar_bottom"></a></p>
+<table border="0" summary="" width="100%" cellspacing="0" cellpadding="1">
+<tbody>
+<tr>
+<td class="NavBarCell1" colspan="2" bgcolor="#EEEEFF"><a name="navbar_bottom_firstrow"></a>
+<table border="0" summary="" cellspacing="3" cellpadding="0">
+<tbody>
+<tr align="center" valign="top">
+<td class="NavBarCell1" bgcolor="#EEEEFF"><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/overview-summary.html"><span class="NavBarFont1"><strong>Overview</strong></span></a>&nbsp;</td>
+<td class="NavBarCell1" bgcolor="#EEEEFF"><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/package-summary.html"><span class="NavBarFont1"><strong>Package</strong></span></a>&nbsp;</td>
+<td class="NavBarCell1Rev" bgcolor="#EEFFFF">&nbsp;<span class="NavBarFont1Rev"><strong>Student</strong></span>&nbsp;</td>
+<td class="NavBarCell1" bgcolor="#FFFFFF">&nbsp;<span class="NavBarFont1"><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html"><strong>Complete</strong></a></span>&nbsp;</td>
+<td class="NavBarCell1" bgcolor="#EEEEFF"><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/package-tree.html"><span class="NavBarFont1"><strong>Tree</strong></span></a>&nbsp;</td>
+<td class="NavBarCell1" bgcolor="#EEEEFF"><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/index-all.html"><span class="NavBarFont1"><strong>Index</strong></span></a>&nbsp;</td>
+<td class="NavBarCell1" bgcolor="#EEEEFF"><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/help-doc.html"><span class="NavBarFont1"><strong>Help</strong></span></a>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td rowspan="3" align="right" valign="top">&nbsp;</td>
+</tr>
+<tr>
+<td class="NavBarCell2" bgcolor="white">&nbsp;<a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/DialogProgram.html"><strong>PREV CLASS</strong></a>&nbsp; &nbsp;<a title="class in acm.program" href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/Program.html"><strong>NEXT CLASS</strong></a></td>
+<td class="NavBarCell2" bgcolor="white"><a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/index.html?acm/program/GraphicsProgram.html" target="_top"><strong>FRAMES</strong></a>&nbsp;&nbsp; &nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html" target="_top"><strong>NO FRAMES</strong></a>&nbsp;&nbsp; &nbsp;</td>
+</tr>
+<tr>
+<td class="NavBarCell3" valign="top">SUMMARY:&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#nested_classes_inherited_from_class_javax.swing.JApplet">NESTED</a>&nbsp;|&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#fields_inherited_from_class_acm.program.Program">FIELD</a>&nbsp;|&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#constructor_summary">CONSTR</a>&nbsp;|&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#method_summary">METHOD</a></td>
+<td class="NavBarCell3" valign="top">DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#constructor_detail">CONSTR</a>&nbsp;|&nbsp;<a href="https://cs.stanford.edu/people/eroberts/jtf/javadoc/complete/acm/program/GraphicsProgram.html#method_detail">METHOD</a></td>
+</tr>
+</tbody>
+</table>
+<p><code></code></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Rersources:&nbsp;</p>
+<p><a title="repository access" href="https://github.com/comp129/customer-project-zapdos/tree/main">Github: repository access</a></p>
