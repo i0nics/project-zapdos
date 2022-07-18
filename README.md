@@ -86,10 +86,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- Contact -->
 ## Contact
 
-* Bikram Chatterjee - b_chatterjee@u.pacific.edu
+* [Bikram Chatterjee](https://www.linkedin.com/in/bikramce/)
 * Vijay Kumar
-* Jordan Sommers
-* Shahbaj Sohal
+* [Jordan Sommers](https://www.linkedin.com/in/jordan-somers-18a9a4204/)
+* [Shahbaj Sohal](https://www.linkedin.com/in/shahbaj-sohal-3a42b6233/)
 
 
 
@@ -108,7 +108,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <div align="center">
     <br><br>
-    Made with ❤️ by Zapdos
+    Made with ❤️ by Team Zapdos
 </div>
 
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
